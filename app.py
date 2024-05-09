@@ -67,8 +67,19 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import time
-import pyautogui
+# import pyautogui
 import os
+
+
+
+# Set the DISPLAY environment variable to a dummy value
+os.environ['DISPLAY'] = ':0.0'
+
+# Now import pyautogui
+import pyautogui
+
+# Rest of your code...
+
 
 def main():
     st.title("Image Upload")
