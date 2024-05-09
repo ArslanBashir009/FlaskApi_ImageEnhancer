@@ -7,9 +7,6 @@ import time
 import pyautogui
 import os
 
-
-
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -38,6 +35,9 @@ def upload_file():
     file.save(file_path)
     
     driver = webdriver.Chrome()
+
+    
+
     # driver.set_window_size(375,667)
     driver.maximize_window()
 
