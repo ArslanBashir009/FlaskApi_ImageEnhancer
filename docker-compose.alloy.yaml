@@ -1,0 +1,16 @@
+services:
+  app:
+    image: python:3.11-slim-bookworm
+    working_dir: /workspace
+    network_mode: host
+    volumes:
+      - .:/workspace
+    environment:
+      IS_ALLOY: ${IS_ALLOY:-false}
+    # pyautogui needs an X display at import time (app.py forces DISPLAY=:0.0), so start Xvfb first
+    command: >
+      bash -lc "apt-get update -qq && apt-get install -y -qq xvfb python3-tk scrot >/dev/null &&
+      pip install -q -r requirements.txt &&
+      mkdir -p uploads && touch /root/.Xauthority &&
+      (Xvfb :0 -screen 0 1280x1024x24 >/dev/null 2>&1 &) && sleep 2 &&
+      streamlit run app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false"
